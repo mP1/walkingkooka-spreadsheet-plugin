@@ -17,9 +17,18 @@
 
 package walkingkooka.spreadsheet.plugin;
 
+import walkingkooka.plugin.PluginProvider;
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 
 public final class SpreadsheetPluginProviders implements PublicStaticHelper {
+
+    /**
+     * {@see PluginProviderSpreadsheetComparatorProvider}
+     */
+    public static SpreadsheetComparatorProvider spreadsheetComparatorProvider(final PluginProvider pluginProvider) {
+        return PluginProviderSpreadsheetComparatorProvider.with(pluginProvider);
+    }
 
     /**
      * Stop creation
