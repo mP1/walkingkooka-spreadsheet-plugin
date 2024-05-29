@@ -20,8 +20,16 @@ package walkingkooka.spreadsheet.plugin;
 import walkingkooka.plugin.PluginProvider;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
 
 public final class SpreadsheetPluginProviders implements PublicStaticHelper {
+
+    /**
+     * {@see PluginProviderExpressionFunctionProvider}
+     */
+    public static ExpressionFunctionProvider expressionFunctionProvider(final PluginProvider pluginProvider) {
+        return PluginProviderExpressionFunctionProvider.with(pluginProvider);
+    }
 
     /**
      * {@see PluginProviderSpreadsheetComparatorProvider}
