@@ -25,13 +25,6 @@ import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider
 public final class SpreadsheetPluginProviders implements PublicStaticHelper {
 
     /**
-     * {@see PluginProviderExpressionFunctionProvider}
-     */
-    public static ExpressionFunctionProvider expressionFunctionProvider(final PluginProvider pluginProvider) {
-        return PluginProviderExpressionFunctionProvider.with(pluginProvider);
-    }
-
-    /**
      * {@see PluginProviderSpreadsheetComparatorProvider}
      */
     public static SpreadsheetComparatorProvider spreadsheetComparatorProvider(final PluginProvider pluginProvider) {
