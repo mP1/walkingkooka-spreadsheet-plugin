@@ -24,6 +24,9 @@ import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
 
+/**
+ * Factory methods to create a {@link PluginProvider} for some spreadsheet providers.
+ */
 public final class SpreadsheetPluginProviders implements PublicStaticHelper {
 
     /**
