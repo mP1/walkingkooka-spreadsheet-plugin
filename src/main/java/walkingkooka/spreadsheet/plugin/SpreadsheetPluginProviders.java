@@ -22,6 +22,7 @@ import walkingkooka.plugin.PluginProvider;
 import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
 
 public final class SpreadsheetPluginProviders implements PublicStaticHelper {
 
@@ -33,6 +34,19 @@ public final class SpreadsheetPluginProviders implements PublicStaticHelper {
                                                                final AbsoluteUrl url) {
         return SpreadsheetComparatorProviderPluginProvider.with(
                 spreadsheetComparatorProvider,
+                name,
+                url
+        );
+    }
+
+    /**
+     * {@see SpreadsheetFormatterProviderPluginProvider}
+     */
+    public static PluginProvider spreadsheetFormatterProvider(final SpreadsheetFormatterProvider spreadsheetFormatterProvider,
+                                                              final PluginProviderName name,
+                                                              final AbsoluteUrl url) {
+        return SpreadsheetFormatterProviderPluginProvider.with(
+                spreadsheetFormatterProvider,
                 name,
                 url
         );
