@@ -154,13 +154,23 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
         );
     }
 
+    // SpreadsheetComparatorProvider....................................................................................
+
     @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
+    public SpreadsheetComparatorProviderPluginProvider createSpreadsheetComparatorProvider() {
+        return this.createPluginProvider();
     }
+
+    // class............................................................................................................
 
     @Override
     public Class<SpreadsheetComparatorProviderPluginProvider> type() {
         return SpreadsheetComparatorProviderPluginProvider.class;
+    }
+
+
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
