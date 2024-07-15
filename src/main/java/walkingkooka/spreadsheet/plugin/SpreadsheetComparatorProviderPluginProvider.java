@@ -58,7 +58,7 @@ final class SpreadsheetComparatorProviderPluginProvider implements SpreadsheetCo
     }
 
     @Override
-    public Optional<SpreadsheetComparator<?>> spreadsheetComparator(final SpreadsheetComparatorName name) {
+    public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name) {
         return this.spreadsheetComparatorProvider.spreadsheetComparator(name);
     }
 

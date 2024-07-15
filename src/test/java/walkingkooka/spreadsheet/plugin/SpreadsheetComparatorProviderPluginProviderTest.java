@@ -56,7 +56,7 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
 
     private final static SpreadsheetComparatorProvider SPREADSHEET_COMPARATOR_PROVIDER = new SpreadsheetComparatorProvider() {
         @Override
-        public Optional<SpreadsheetComparator<?>> spreadsheetComparator(final SpreadsheetComparatorName name) {
+        public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name) {
             return SpreadsheetComparatorProviders.spreadsheetComparators()
                     .spreadsheetComparator(name);
         }
