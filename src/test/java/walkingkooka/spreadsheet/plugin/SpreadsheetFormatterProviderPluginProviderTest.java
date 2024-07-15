@@ -35,7 +35,10 @@ import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderTesting;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelector;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
+import walkingkooka.spreadsheet.parser.SpreadsheetParser;
+import walkingkooka.spreadsheet.parser.SpreadsheetParserName;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -61,6 +64,16 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector) {
             return SpreadsheetFormatterProviders.spreadsheetFormatPattern()
                     .spreadsheetFormatter(selector);
+        }
+
+        @Override
+        public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterName name,
+                                                         final List<?> values) {
+            return SpreadsheetFormatterProviders.spreadsheetFormatPattern()
+                    .spreadsheetFormatter(
+                            name,
+                            values
+                    );
         }
 
         @Override
