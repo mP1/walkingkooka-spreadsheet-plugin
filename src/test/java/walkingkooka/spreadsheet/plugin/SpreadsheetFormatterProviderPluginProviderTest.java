@@ -58,7 +58,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     private final static SpreadsheetFormatterProvider SPREADSHEET_FORMATTER_PROVIDER = new SpreadsheetFormatterProvider() {
 
         @Override
-        public Optional<SpreadsheetFormatter> spreadsheetFormatter(final SpreadsheetFormatterSelector selector) {
+        public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector) {
             return SpreadsheetFormatterProviders.spreadsheetFormatPattern()
                     .spreadsheetFormatter(selector);
         }

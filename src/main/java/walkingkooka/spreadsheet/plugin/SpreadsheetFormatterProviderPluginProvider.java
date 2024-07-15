@@ -58,7 +58,7 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
     }
 
     @Override
-    public Optional<SpreadsheetFormatter> spreadsheetFormatter(final SpreadsheetFormatterSelector selector) {
+    public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector) {
         return this.spreadsheetFormatterProvider.spreadsheetFormatter(selector);
     }
 
