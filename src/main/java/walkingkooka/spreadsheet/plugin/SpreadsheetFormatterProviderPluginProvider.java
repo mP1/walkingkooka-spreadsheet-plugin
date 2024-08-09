@@ -22,12 +22,16 @@ import walkingkooka.plugin.PluginInfo;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginProvider;
 import walkingkooka.plugin.PluginProviderName;
+import walkingkooka.plugin.ProviderContext;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatter;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfo;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterName;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderSamplesContext;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterSample;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelector;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelectorTextComponent;
 import walkingkooka.spreadsheet.parser.SpreadsheetParser;
 import walkingkooka.spreadsheet.parser.SpreadsheetParserName;
 
@@ -62,16 +66,36 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
     }
 
     @Override
-    public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector) {
-        return this.spreadsheetFormatterProvider.spreadsheetFormatter(selector);
+    public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector,
+                                                     final ProviderContext context) {
+        return this.spreadsheetFormatterProvider.spreadsheetFormatter(
+                selector,
+                context
+        );
     }
 
     @Override
     public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterName name,
-                                                     final List<?> values) {
+                                                     final List<?> values,
+                                                     final ProviderContext context) {
         return this.spreadsheetFormatterProvider.spreadsheetFormatter(
                 name,
-                values
+                values,
+                context
+        );
+    }
+
+    @Override
+    public Optional<SpreadsheetFormatterSelectorTextComponent> spreadsheetFormatterNextTextComponent(final SpreadsheetFormatterSelector selector) {
+        return this.spreadsheetFormatterProvider.spreadsheetFormatterNextTextComponent(selector);
+    }
+
+    @Override
+    public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterName name,
+                                                                        final SpreadsheetFormatterProviderSamplesContext context) {
+        return this.spreadsheetFormatterProvider.spreadsheetFormatterSamples(
+                name,
+                context
         );
     }
 

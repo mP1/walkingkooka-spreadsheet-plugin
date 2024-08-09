@@ -26,15 +26,22 @@ import walkingkooka.plugin.PluginInfo;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.plugin.PluginProviderTesting;
+import walkingkooka.plugin.ProviderContext;
+import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.spreadsheet.format.FakeSpreadsheetFormatterProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatter;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfo;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterName;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderSamplesContext;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderTesting;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterSample;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelector;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelectorTextComponent;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
+import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
 import walkingkooka.spreadsheet.parser.SpreadsheetParser;
 import walkingkooka.spreadsheet.parser.SpreadsheetParserName;
 
@@ -46,6 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class SpreadsheetFormatterProviderPluginProviderTest implements PluginProviderTesting<SpreadsheetFormatterProviderPluginProvider>,
         SpreadsheetFormatterProviderTesting<SpreadsheetFormatterProviderPluginProvider>,
+        SpreadsheetMetadataTesting,
         ToStringTesting<SpreadsheetFormatterProviderPluginProvider> {
 
     private final static AbsoluteUrl SPREADSHEET_FORMATTER_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetFormatterInfo123");
@@ -61,19 +69,37 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     private final static SpreadsheetFormatterProvider SPREADSHEET_FORMATTER_PROVIDER = new SpreadsheetFormatterProvider() {
 
         @Override
-        public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector) {
-            return SpreadsheetFormatterProviders.spreadsheetFormatPattern()
-                    .spreadsheetFormatter(selector);
+        public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector,
+                                                         final ProviderContext context) {
+            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
+                            selector,
+                            context
+                    );
         }
 
         @Override
         public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterName name,
-                                                         final List<?> values) {
-            return SpreadsheetFormatterProviders.spreadsheetFormatPattern()
-                    .spreadsheetFormatter(
+                                                         final List<?> values,
+                                                         final ProviderContext context) {
+            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
                             name,
-                            values
+                            values,
+                            context
                     );
+        }
+
+        @Override
+        public Optional<SpreadsheetFormatterSelectorTextComponent> spreadsheetFormatterNextTextComponent(final SpreadsheetFormatterSelector selector) {
+            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterNextTextComponent(selector);
+        }
+
+        @Override
+        public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterName name,
+                                                                            final SpreadsheetFormatterProviderSamplesContext context) {
+            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterSamples(
+                    name,
+                    context
+            );
         }
 
         @Override
@@ -127,6 +153,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         this.spreadsheetFormatterAndCheck(
                 this.createPluginProvider(),
                 SpreadsheetFormatterSelector.parse("text-format-pattern @@"),
+                PROVIDER_CONTEXT,
                 SpreadsheetPattern.parseTextFormatPattern("@@")
                         .formatter()
         );
