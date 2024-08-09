@@ -26,6 +26,7 @@ import walkingkooka.plugin.PluginInfo;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.plugin.PluginProviderTesting;
+import walkingkooka.plugin.ProviderContext;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparator;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorInfo;
@@ -34,6 +35,7 @@ import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProviderTesting;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProviders;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparators;
+import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
 
 import java.util.Optional;
 import java.util.Set;
@@ -42,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class SpreadsheetComparatorProviderPluginProviderTest implements PluginProviderTesting<SpreadsheetComparatorProviderPluginProvider>,
         SpreadsheetComparatorProviderTesting<SpreadsheetComparatorProviderPluginProvider>,
+        SpreadsheetMetadataTesting,
         ToStringTesting<SpreadsheetComparatorProviderPluginProvider> {
 
     private final static AbsoluteUrl SPREADSHEET_COMPARATOR_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetComparatorInfo123");
@@ -56,9 +59,13 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
 
     private final static SpreadsheetComparatorProvider SPREADSHEET_COMPARATOR_PROVIDER = new SpreadsheetComparatorProvider() {
         @Override
-        public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name) {
+        public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name,
+                                                              final ProviderContext context) {
             return SpreadsheetComparatorProviders.spreadsheetComparators()
-                    .spreadsheetComparator(name);
+                    .spreadsheetComparator(
+                            name,
+                            context
+                    );
         }
 
         @Override
@@ -114,6 +121,7 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
         this.spreadsheetComparatorAndCheck(
                 this.createPluginProvider(),
                 comparator.name(),
+                PROVIDER_CONTEXT,
                 comparator
         );
     }
