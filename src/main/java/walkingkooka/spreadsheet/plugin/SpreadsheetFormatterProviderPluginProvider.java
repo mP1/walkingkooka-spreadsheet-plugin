@@ -31,7 +31,7 @@ import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderSamplesContext;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSample;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelector;
-import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelectorTextComponent;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelectorToken;
 import walkingkooka.spreadsheet.parser.SpreadsheetParser;
 import walkingkooka.spreadsheet.parser.SpreadsheetParserName;
 
@@ -86,8 +86,8 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
     }
 
     @Override
-    public Optional<SpreadsheetFormatterSelectorTextComponent> spreadsheetFormatterNextTextComponent(final SpreadsheetFormatterSelector selector) {
-        return this.spreadsheetFormatterProvider.spreadsheetFormatterNextTextComponent(selector);
+    public Optional<SpreadsheetFormatterSelectorToken> spreadsheetFormatterNextToken(final SpreadsheetFormatterSelector selector) {
+        return this.spreadsheetFormatterProvider.spreadsheetFormatterNextToken(selector);
     }
 
     @Override
