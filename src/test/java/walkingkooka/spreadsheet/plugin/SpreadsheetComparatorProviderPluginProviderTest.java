@@ -30,6 +30,7 @@ import walkingkooka.plugin.ProviderContext;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparator;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorInfo;
+import walkingkooka.spreadsheet.compare.SpreadsheetComparatorInfoSet;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorName;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProviderTesting;
@@ -50,7 +51,7 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
     private final static AbsoluteUrl SPREADSHEET_COMPARATOR_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetComparatorInfo123");
     private final static String SPREADSHEET_COMPARATOR_INFO_NAME = "Test456";
 
-    private final static Set<SpreadsheetComparatorInfo> INFOS = Sets.of(
+    private final static SpreadsheetComparatorInfoSet INFOS = SpreadsheetComparatorInfoSet.EMPTY.concat(
             SpreadsheetComparatorInfo.with(
                     SPREADSHEET_COMPARATOR_INFO_URL,
                     SpreadsheetComparatorName.with(SPREADSHEET_COMPARATOR_INFO_NAME)
@@ -69,7 +70,7 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
         }
 
         @Override
-        public Set<SpreadsheetComparatorInfo> spreadsheetComparatorInfos() {
+        public SpreadsheetComparatorInfoSet spreadsheetComparatorInfos() {
             return INFOS;
         }
     };
