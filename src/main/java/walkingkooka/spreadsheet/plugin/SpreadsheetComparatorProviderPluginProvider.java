@@ -25,6 +25,7 @@ import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparator;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorInfo;
+import walkingkooka.spreadsheet.compare.SpreadsheetComparatorInfoSet;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorName;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 
@@ -68,7 +69,7 @@ final class SpreadsheetComparatorProviderPluginProvider implements SpreadsheetCo
     }
 
     @Override
-    public Set<SpreadsheetComparatorInfo> spreadsheetComparatorInfos() {
+    public SpreadsheetComparatorInfoSet spreadsheetComparatorInfos() {
         return this.spreadsheetComparatorProvider.spreadsheetComparatorInfos();
     }
 

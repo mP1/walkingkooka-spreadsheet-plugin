@@ -32,6 +32,7 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.spreadsheet.format.FakeSpreadsheetFormatterProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatter;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfo;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfoSet;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterName;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderSamplesContext;
@@ -59,7 +60,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     private final static AbsoluteUrl SPREADSHEET_FORMATTER_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetFormatterInfo123");
     private final static String SPREADSHEET_FORMATTER_INFO_NAME = "Test456";
 
-    private final static Set<SpreadsheetFormatterInfo> INFOS = Sets.of(
+    private final static SpreadsheetFormatterInfoSet INFOS = SpreadsheetFormatterInfoSet.EMPTY.concat(
             SpreadsheetFormatterInfo.with(
                     SPREADSHEET_FORMATTER_INFO_URL,
                     SpreadsheetFormatterName.with(SPREADSHEET_FORMATTER_INFO_NAME)
@@ -103,7 +104,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         }
 
         @Override
-        public Set<SpreadsheetFormatterInfo> spreadsheetFormatterInfos() {
+        public SpreadsheetFormatterInfoSet spreadsheetFormatterInfos() {
             return INFOS;
         }
     };
