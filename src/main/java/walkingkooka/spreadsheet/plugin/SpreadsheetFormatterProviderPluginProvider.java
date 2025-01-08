@@ -23,7 +23,6 @@ import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginProvider;
 import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.plugin.ProviderContext;
-import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatter;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfo;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfoSet;
@@ -33,8 +32,6 @@ import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderSamplesContex
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSample;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelector;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelectorToken;
-import walkingkooka.spreadsheet.parser.SpreadsheetParser;
-import walkingkooka.spreadsheet.parser.SpreadsheetParserName;
 
 import java.util.List;
 import java.util.Objects;
@@ -47,14 +44,14 @@ import java.util.stream.Collectors;
  * the {@link SpreadsheetFormatterProvider#spreadsheetFormatterInfos()}.
  */
 final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFormatterProvider,
-        PluginProvider {
+    PluginProvider {
     static SpreadsheetFormatterProviderPluginProvider with(final SpreadsheetFormatterProvider spreadsheetFormatterProvider,
                                                            final PluginProviderName name,
                                                            final AbsoluteUrl url) {
         return new SpreadsheetFormatterProviderPluginProvider(
-                Objects.requireNonNull(spreadsheetFormatterProvider, "spreadsheetFormatterProvider"),
-                Objects.requireNonNull(name, "name"),
-                Objects.requireNonNull(url, "url")
+            Objects.requireNonNull(spreadsheetFormatterProvider, "spreadsheetFormatterProvider"),
+            Objects.requireNonNull(name, "name"),
+            Objects.requireNonNull(url, "url")
         );
     }
 
@@ -70,8 +67,8 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
     public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector,
                                                      final ProviderContext context) {
         return this.spreadsheetFormatterProvider.spreadsheetFormatter(
-                selector,
-                context
+            selector,
+            context
         );
     }
 
@@ -80,9 +77,9 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
                                                      final List<?> values,
                                                      final ProviderContext context) {
         return this.spreadsheetFormatterProvider.spreadsheetFormatter(
-                name,
-                values,
-                context
+            name,
+            values,
+            context
         );
     }
 
@@ -95,8 +92,8 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
     public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterName name,
                                                                         final SpreadsheetFormatterProviderSamplesContext context) {
         return this.spreadsheetFormatterProvider.spreadsheetFormatterSamples(
-                name,
-                context
+            name,
+            context
         );
     }
 
@@ -126,18 +123,18 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
     @Override
     public Set<PluginInfo> pluginInfos() {
         return this.spreadsheetFormatterInfos()
-                .stream()
-                .map(SpreadsheetFormatterProviderPluginProvider::toPlugin)
-                .collect(Collectors.toSet());
+            .stream()
+            .map(SpreadsheetFormatterProviderPluginProvider::toPlugin)
+            .collect(Collectors.toSet());
     }
 
     private static PluginInfo toPlugin(final SpreadsheetFormatterInfo info) {
         return PluginInfo.with(
-                info.url(),
-                PluginName.with(
-                        info.name()
-                                .value()
-                )
+            info.url(),
+            PluginName.with(
+                info.name()
+                    .value()
+            )
         );
     }
 
