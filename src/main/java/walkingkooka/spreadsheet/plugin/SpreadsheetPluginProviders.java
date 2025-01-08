@@ -36,9 +36,9 @@ public final class SpreadsheetPluginProviders implements PublicStaticHelper {
                                                                final PluginProviderName name,
                                                                final AbsoluteUrl url) {
         return SpreadsheetComparatorProviderPluginProvider.with(
-                spreadsheetComparatorProvider,
-                name,
-                url
+            spreadsheetComparatorProvider,
+            name,
+            url
         );
     }
 
@@ -49,9 +49,9 @@ public final class SpreadsheetPluginProviders implements PublicStaticHelper {
                                                               final PluginProviderName name,
                                                               final AbsoluteUrl url) {
         return SpreadsheetFormatterProviderPluginProvider.with(
-                spreadsheetFormatterProvider,
-                name,
-                url
+            spreadsheetFormatterProvider,
+            name,
+            url
         );
     }
 

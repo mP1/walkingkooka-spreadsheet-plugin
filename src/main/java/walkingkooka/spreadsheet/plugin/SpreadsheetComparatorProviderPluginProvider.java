@@ -28,9 +28,10 @@ import walkingkooka.spreadsheet.compare.SpreadsheetComparatorInfo;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorInfoSet;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorName;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
+import walkingkooka.spreadsheet.compare.SpreadsheetComparatorSelector;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,15 +40,15 @@ import java.util.stream.Collectors;
  * the {@link SpreadsheetComparatorProvider#spreadsheetComparatorInfos()}.
  */
 final class SpreadsheetComparatorProviderPluginProvider implements SpreadsheetComparatorProvider,
-        PluginProvider {
+    PluginProvider {
 
     static SpreadsheetComparatorProviderPluginProvider with(final SpreadsheetComparatorProvider spreadsheetComparatorProvider,
                                                             final PluginProviderName name,
                                                             final AbsoluteUrl url) {
         return new SpreadsheetComparatorProviderPluginProvider(
-                Objects.requireNonNull(spreadsheetComparatorProvider, "spreadsheetComparatorProvider"),
-                Objects.requireNonNull(name, "name"),
-                Objects.requireNonNull(url, "url")
+            Objects.requireNonNull(spreadsheetComparatorProvider, "spreadsheetComparatorProvider"),
+            Objects.requireNonNull(name, "name"),
+            Objects.requireNonNull(url, "url")
         );
     }
 
@@ -60,11 +61,22 @@ final class SpreadsheetComparatorProviderPluginProvider implements SpreadsheetCo
     }
 
     @Override
-    public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name,
+    public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorSelector selector,
                                                           final ProviderContext context) {
         return this.spreadsheetComparatorProvider.spreadsheetComparator(
-                name,
-                context
+            selector,
+            context
+        );
+    }
+
+    @Override
+    public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name,
+                                                          final List<?> values,
+                                                          final ProviderContext context) {
+        return this.spreadsheetComparatorProvider.spreadsheetComparator(
+            name,
+            values,
+            context
         );
     }
 
@@ -94,18 +106,18 @@ final class SpreadsheetComparatorProviderPluginProvider implements SpreadsheetCo
     @Override
     public Set<PluginInfo> pluginInfos() {
         return this.spreadsheetComparatorInfos()
-                .stream()
-                .map(SpreadsheetComparatorProviderPluginProvider::toPlugin)
-                .collect(Collectors.toSet());
+            .stream()
+            .map(SpreadsheetComparatorProviderPluginProvider::toPlugin)
+            .collect(Collectors.toSet());
     }
 
     private static PluginInfo toPlugin(final SpreadsheetComparatorInfo info) {
         return PluginInfo.with(
-                info.url(),
-                PluginName.with(
-                        info.name()
-                                .value()
-                )
+            info.url(),
+            PluginName.with(
+                info.name()
+                    .value()
+            )
         );
     }
 

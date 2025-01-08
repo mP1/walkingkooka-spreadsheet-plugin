@@ -19,7 +19,7 @@ package walkingkooka.spreadsheet.plugin;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
-import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.plugin.PluginInfo;
@@ -35,38 +35,50 @@ import walkingkooka.spreadsheet.compare.SpreadsheetComparatorName;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProviderTesting;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProviders;
+import walkingkooka.spreadsheet.compare.SpreadsheetComparatorSelector;
 import walkingkooka.spreadsheet.compare.SpreadsheetComparators;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class SpreadsheetComparatorProviderPluginProviderTest implements PluginProviderTesting<SpreadsheetComparatorProviderPluginProvider>,
-        SpreadsheetComparatorProviderTesting<SpreadsheetComparatorProviderPluginProvider>,
-        SpreadsheetMetadataTesting,
-        ToStringTesting<SpreadsheetComparatorProviderPluginProvider> {
+    SpreadsheetComparatorProviderTesting<SpreadsheetComparatorProviderPluginProvider>,
+    SpreadsheetMetadataTesting,
+    ToStringTesting<SpreadsheetComparatorProviderPluginProvider> {
 
     private final static AbsoluteUrl SPREADSHEET_COMPARATOR_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetComparatorInfo123");
     private final static String SPREADSHEET_COMPARATOR_INFO_NAME = "Test456";
 
     private final static SpreadsheetComparatorInfoSet INFOS = SpreadsheetComparatorInfoSet.EMPTY.concat(
-            SpreadsheetComparatorInfo.with(
-                    SPREADSHEET_COMPARATOR_INFO_URL,
-                    SpreadsheetComparatorName.with(SPREADSHEET_COMPARATOR_INFO_NAME)
-            )
+        SpreadsheetComparatorInfo.with(
+            SPREADSHEET_COMPARATOR_INFO_URL,
+            SpreadsheetComparatorName.with(SPREADSHEET_COMPARATOR_INFO_NAME)
+        )
     );
 
     private final static SpreadsheetComparatorProvider SPREADSHEET_COMPARATOR_PROVIDER = new SpreadsheetComparatorProvider() {
         @Override
-        public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name,
+        public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorSelector selector,
                                                               final ProviderContext context) {
             return SpreadsheetComparatorProviders.spreadsheetComparators()
-                    .spreadsheetComparator(
-                            name,
-                            context
-                    );
+                .spreadsheetComparator(
+                    selector,
+                    context
+                );
+        }
+
+        @Override
+        public SpreadsheetComparator<?> spreadsheetComparator(final SpreadsheetComparatorName name,
+                                                              final List<?> values,
+                                                              final ProviderContext context) {
+            return SpreadsheetComparatorProviders.spreadsheetComparators()
+                .spreadsheetComparator(
+                    name,
+                    values,
+                    context
+                );
         }
 
         @Override
@@ -82,36 +94,36 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
     @Test
     public void testWithNullSpreadsheetComparatorProviderFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> SpreadsheetComparatorProviderPluginProvider.with(
-                        null,
-                        NAME,
-                        URL
-                )
+            NullPointerException.class,
+            () -> SpreadsheetComparatorProviderPluginProvider.with(
+                null,
+                NAME,
+                URL
+            )
         );
     }
 
     @Test
     public void testWithNullNameFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> SpreadsheetComparatorProviderPluginProvider.with(
-                        SPREADSHEET_COMPARATOR_PROVIDER,
-                        null,
-                        URL
-                )
+            NullPointerException.class,
+            () -> SpreadsheetComparatorProviderPluginProvider.with(
+                SPREADSHEET_COMPARATOR_PROVIDER,
+                null,
+                URL
+            )
         );
     }
 
     @Test
     public void testWithNullUrlFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> SpreadsheetComparatorProviderPluginProvider.with(
-                        SPREADSHEET_COMPARATOR_PROVIDER,
-                        NAME,
-                        null
-                )
+            NullPointerException.class,
+            () -> SpreadsheetComparatorProviderPluginProvider.with(
+                SPREADSHEET_COMPARATOR_PROVIDER,
+                NAME,
+                null
+            )
         );
     }
 
@@ -120,36 +132,37 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
         final SpreadsheetComparator<?> comparator = SpreadsheetComparators.date();
 
         this.spreadsheetComparatorAndCheck(
-                this.createPluginProvider(),
-                comparator.name(),
-                PROVIDER_CONTEXT,
-                comparator
+            this.createPluginProvider(),
+            comparator.name(),
+            Lists.empty(),
+            PROVIDER_CONTEXT,
+            comparator
         );
     }
 
     @Test
     public void testSpreadsheetComparatorInfos() {
         this.spreadsheetComparatorInfosAndCheck(
-                this.createPluginProvider(),
-                SPREADSHEET_COMPARATOR_PROVIDER.spreadsheetComparatorInfos()
+            this.createPluginProvider(),
+            SPREADSHEET_COMPARATOR_PROVIDER.spreadsheetComparatorInfos()
         );
     }
 
     @Test
     public void testPluginInfos() {
         this.pluginInfosAndCheck(
-                PluginInfo.with(
-                        SPREADSHEET_COMPARATOR_INFO_URL,
-                        PluginName.with(SPREADSHEET_COMPARATOR_INFO_NAME)
-                )
+            PluginInfo.with(
+                SPREADSHEET_COMPARATOR_INFO_URL,
+                PluginName.with(SPREADSHEET_COMPARATOR_INFO_NAME)
+            )
         );
     }
 
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.createPluginProvider(),
-                SPREADSHEET_COMPARATOR_PROVIDER.toString()
+            this.createPluginProvider(),
+            SPREADSHEET_COMPARATOR_PROVIDER.toString()
         );
     }
 
@@ -158,9 +171,9 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
     @Override
     public SpreadsheetComparatorProviderPluginProvider createPluginProvider() {
         return SpreadsheetComparatorProviderPluginProvider.with(
-                SPREADSHEET_COMPARATOR_PROVIDER,
-                NAME,
-                URL
+            SPREADSHEET_COMPARATOR_PROVIDER,
+            NAME,
+            URL
         );
     }
 

@@ -19,7 +19,6 @@ package walkingkooka.spreadsheet.plugin;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.plugin.PluginInfo;
@@ -27,9 +26,7 @@ import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.plugin.PluginProviderTesting;
 import walkingkooka.plugin.ProviderContext;
-import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.spreadsheet.format.FakeSpreadsheetFormatterProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatter;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfo;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterInfoSet;
@@ -37,34 +34,30 @@ import walkingkooka.spreadsheet.format.SpreadsheetFormatterName;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderSamplesContext;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviderTesting;
-import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSample;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelector;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterSelectorToken;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
-import walkingkooka.spreadsheet.parser.SpreadsheetParser;
-import walkingkooka.spreadsheet.parser.SpreadsheetParserName;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class SpreadsheetFormatterProviderPluginProviderTest implements PluginProviderTesting<SpreadsheetFormatterProviderPluginProvider>,
-        SpreadsheetFormatterProviderTesting<SpreadsheetFormatterProviderPluginProvider>,
-        SpreadsheetMetadataTesting,
-        ToStringTesting<SpreadsheetFormatterProviderPluginProvider> {
+    SpreadsheetFormatterProviderTesting<SpreadsheetFormatterProviderPluginProvider>,
+    SpreadsheetMetadataTesting,
+    ToStringTesting<SpreadsheetFormatterProviderPluginProvider> {
 
     private final static AbsoluteUrl SPREADSHEET_FORMATTER_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetFormatterInfo123");
     private final static String SPREADSHEET_FORMATTER_INFO_NAME = "Test456";
 
     private final static SpreadsheetFormatterInfoSet INFOS = SpreadsheetFormatterInfoSet.EMPTY.concat(
-            SpreadsheetFormatterInfo.with(
-                    SPREADSHEET_FORMATTER_INFO_URL,
-                    SpreadsheetFormatterName.with(SPREADSHEET_FORMATTER_INFO_NAME)
-            )
+        SpreadsheetFormatterInfo.with(
+            SPREADSHEET_FORMATTER_INFO_URL,
+            SpreadsheetFormatterName.with(SPREADSHEET_FORMATTER_INFO_NAME)
+        )
     );
 
     private final static SpreadsheetFormatterProvider SPREADSHEET_FORMATTER_PROVIDER = new SpreadsheetFormatterProvider() {
@@ -73,9 +66,9 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector,
                                                          final ProviderContext context) {
             return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
-                            selector,
-                            context
-                    );
+                selector,
+                context
+            );
         }
 
         @Override
@@ -83,10 +76,10 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
                                                          final List<?> values,
                                                          final ProviderContext context) {
             return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
-                            name,
-                            values,
-                            context
-                    );
+                name,
+                values,
+                context
+            );
         }
 
         @Override
@@ -98,8 +91,8 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterName name,
                                                                             final SpreadsheetFormatterProviderSamplesContext context) {
             return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterSamples(
-                    name,
-                    context
+                name,
+                context
             );
         }
 
@@ -116,55 +109,55 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     @Test
     public void testWithNullSpreadsheetFormatterProviderFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> SpreadsheetFormatterProviderPluginProvider.with(
-                        null,
-                        NAME,
-                        URL
-                )
+            NullPointerException.class,
+            () -> SpreadsheetFormatterProviderPluginProvider.with(
+                null,
+                NAME,
+                URL
+            )
         );
     }
 
     @Test
     public void testWithNullNameFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> SpreadsheetFormatterProviderPluginProvider.with(
-                        SPREADSHEET_FORMATTER_PROVIDER,
-                        null,
-                        URL
-                )
+            NullPointerException.class,
+            () -> SpreadsheetFormatterProviderPluginProvider.with(
+                SPREADSHEET_FORMATTER_PROVIDER,
+                null,
+                URL
+            )
         );
     }
 
     @Test
     public void testWithNullUrlFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> SpreadsheetFormatterProviderPluginProvider.with(
-                        SPREADSHEET_FORMATTER_PROVIDER,
-                        NAME,
-                        null
-                )
+            NullPointerException.class,
+            () -> SpreadsheetFormatterProviderPluginProvider.with(
+                SPREADSHEET_FORMATTER_PROVIDER,
+                NAME,
+                null
+            )
         );
     }
 
     @Test
     public void testSpreadsheetFormatterName() {
         this.spreadsheetFormatterAndCheck(
-                this.createPluginProvider(),
-                SpreadsheetFormatterSelector.parse("text-format-pattern @@"),
-                PROVIDER_CONTEXT,
-                SpreadsheetPattern.parseTextFormatPattern("@@")
-                        .formatter()
+            this.createPluginProvider(),
+            SpreadsheetFormatterSelector.parse("text-format-pattern @@"),
+            PROVIDER_CONTEXT,
+            SpreadsheetPattern.parseTextFormatPattern("@@")
+                .formatter()
         );
     }
 
     @Test
     public void testSpreadsheetFormatterInfos() {
         this.spreadsheetFormatterInfosAndCheck(
-                this.createPluginProvider(),
-                SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterInfos()
+            this.createPluginProvider(),
+            SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterInfos()
         );
     }
 
@@ -176,18 +169,18 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     @Test
     public void testPluginInfos() {
         this.pluginInfosAndCheck(
-                PluginInfo.with(
-                        SPREADSHEET_FORMATTER_INFO_URL,
-                        PluginName.with(SPREADSHEET_FORMATTER_INFO_NAME)
-                )
+            PluginInfo.with(
+                SPREADSHEET_FORMATTER_INFO_URL,
+                PluginName.with(SPREADSHEET_FORMATTER_INFO_NAME)
+            )
         );
     }
 
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.createPluginProvider(),
-                SPREADSHEET_FORMATTER_PROVIDER.toString()
+            this.createPluginProvider(),
+            SPREADSHEET_FORMATTER_PROVIDER.toString()
         );
     }
 
@@ -196,9 +189,9 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     @Override
     public SpreadsheetFormatterProviderPluginProvider createPluginProvider() {
         return SpreadsheetFormatterProviderPluginProvider.with(
-                SPREADSHEET_FORMATTER_PROVIDER,
-                NAME,
-                URL
+            SPREADSHEET_FORMATTER_PROVIDER,
+            NAME,
+            URL
         );
     }
 
