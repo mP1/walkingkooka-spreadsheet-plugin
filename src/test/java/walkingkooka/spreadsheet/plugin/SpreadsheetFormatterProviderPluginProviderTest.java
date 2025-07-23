@@ -88,10 +88,10 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         }
 
         @Override
-        public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterName name,
+        public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterSelector selector,
                                                                             final SpreadsheetFormatterProviderSamplesContext context) {
             return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterSamples(
-                name,
+                selector,
                 context
             );
         }
