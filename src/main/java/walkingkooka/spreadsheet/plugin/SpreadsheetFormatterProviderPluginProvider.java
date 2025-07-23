@@ -90,9 +90,11 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
 
     @Override
     public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterSelector selector,
+                                                                        final boolean includeSamples,
                                                                         final SpreadsheetFormatterProviderSamplesContext context) {
         return this.spreadsheetFormatterProvider.spreadsheetFormatterSamples(
             selector,
+            includeSamples,
             context
         );
     }
