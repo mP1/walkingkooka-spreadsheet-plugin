@@ -21,7 +21,7 @@ import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.plugin.PluginProvider;
 import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.reflect.PublicStaticHelper;
-import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProvider;
+import walkingkooka.spreadsheet.compare.provider.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
 
 /**
