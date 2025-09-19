@@ -22,7 +22,7 @@ import walkingkooka.plugin.PluginProvider;
 import walkingkooka.plugin.PluginProviderName;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.compare.provider.SpreadsheetComparatorProvider;
-import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
+import walkingkooka.spreadsheet.format.provider.SpreadsheetFormatterProvider;
 
 /**
  * Factory methods to create a {@link PluginProvider} for some spreadsheet providers.
