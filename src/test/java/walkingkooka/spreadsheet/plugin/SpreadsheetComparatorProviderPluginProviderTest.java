@@ -49,7 +49,7 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
     ToStringTesting<SpreadsheetComparatorProviderPluginProvider> {
 
     private final static AbsoluteUrl SPREADSHEET_COMPARATOR_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetComparatorInfo123");
-    private final static String SPREADSHEET_COMPARATOR_INFO_NAME = "Test456";
+    private final static String SPREADSHEET_COMPARATOR_INFO_NAME = "test-456";
 
     private final static SpreadsheetComparatorInfoSet INFOS = SpreadsheetComparatorInfoSet.EMPTY.concat(
         SpreadsheetComparatorInfo.with(
