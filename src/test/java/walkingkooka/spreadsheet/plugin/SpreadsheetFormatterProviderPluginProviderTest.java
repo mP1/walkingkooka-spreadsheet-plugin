@@ -51,7 +51,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     ToStringTesting<SpreadsheetFormatterProviderPluginProvider> {
 
     private final static AbsoluteUrl SPREADSHEET_FORMATTER_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetFormatterInfo123");
-    private final static String SPREADSHEET_FORMATTER_INFO_NAME = "Test456";
+    private final static String SPREADSHEET_FORMATTER_INFO_NAME = "test-456";
 
     private final static SpreadsheetFormatterInfoSet INFOS = SpreadsheetFormatterInfoSet.EMPTY.concat(
         SpreadsheetFormatterInfo.with(
