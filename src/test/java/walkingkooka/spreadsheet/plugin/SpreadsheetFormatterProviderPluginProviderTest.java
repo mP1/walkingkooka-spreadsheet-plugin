@@ -148,7 +148,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
     public void testSpreadsheetFormatterName() {
         this.spreadsheetFormatterAndCheck(
             this.createPluginProvider(),
-            SpreadsheetFormatterSelector.parse("text-format-pattern @@"),
+            SpreadsheetFormatterSelector.parse("text @@"),
             PROVIDER_CONTEXT,
             SpreadsheetPattern.parseTextFormatPattern("@@")
                 .formatter()
