@@ -29,11 +29,6 @@ public final class SpreadsheetPluginProvidersTest implements PublicStaticHelperT
     }
 
     @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
-
-    @Override
     public boolean canHavePublicTypes(final Method method) {
         return false;
     }
