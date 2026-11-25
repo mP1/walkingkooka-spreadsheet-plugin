@@ -38,7 +38,7 @@ import walkingkooka.spreadsheet.format.provider.SpreadsheetFormatterProviderTest
 import walkingkooka.spreadsheet.format.provider.SpreadsheetFormatterSample;
 import walkingkooka.spreadsheet.format.provider.SpreadsheetFormatterSelector;
 import walkingkooka.spreadsheet.format.provider.SpreadsheetFormatterSelectorToken;
-import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
+import walkingkooka.spreadsheet.meta.HasSpreadsheetMetadataTesting;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,8 +47,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class SpreadsheetFormatterProviderPluginProviderTest implements PluginProviderTesting<SpreadsheetFormatterProviderPluginProvider>,
     SpreadsheetFormatterProviderTesting<SpreadsheetFormatterProviderPluginProvider>,
-    SpreadsheetMetadataTesting,
-    ToStringTesting<SpreadsheetFormatterProviderPluginProvider> {
+    HasSpreadsheetMetadataTesting,
+    ToStringTesting {
 
     private final static AbsoluteUrl SPREADSHEET_FORMATTER_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetFormatterInfo123");
     private final static String SPREADSHEET_FORMATTER_INFO_NAME = "test-456";
@@ -65,7 +65,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         @Override
         public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterSelector selector,
                                                          final ProviderContext context) {
-            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
+            return HasSpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
                 selector,
                 context
             );
@@ -75,7 +75,7 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         public SpreadsheetFormatter spreadsheetFormatter(final SpreadsheetFormatterName name,
                                                          final List<?> values,
                                                          final ProviderContext context) {
-            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
+            return HasSpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatter(
                 name,
                 values,
                 context
@@ -84,14 +84,14 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
 
         @Override
         public Optional<SpreadsheetFormatterSelectorToken> spreadsheetFormatterNextToken(final SpreadsheetFormatterSelector selector) {
-            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterNextToken(selector);
+            return HasSpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterNextToken(selector);
         }
 
         @Override
         public List<SpreadsheetFormatterSample> spreadsheetFormatterSamples(final SpreadsheetFormatterSelector selector,
                                                                             final boolean includeSamples,
                                                                             final SpreadsheetFormatterProviderSamplesContext context) {
-            return SpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterSamples(
+            return HasSpreadsheetMetadataTesting.SPREADSHEET_FORMATTER_PROVIDER.spreadsheetFormatterSamples(
                 selector,
                 includeSamples,
                 context
@@ -173,7 +173,10 @@ public final class SpreadsheetFormatterProviderPluginProviderTest implements Plu
         this.pluginInfosAndCheck(
             PluginInfo.with(
                 SPREADSHEET_FORMATTER_INFO_URL,
-                PluginName.with(SPREADSHEET_FORMATTER_INFO_NAME)
+                PluginName.with(
+                    SpreadsheetFormatterName.class.getSimpleName(),
+                    SPREADSHEET_FORMATTER_INFO_NAME
+                )
             )
         );
     }

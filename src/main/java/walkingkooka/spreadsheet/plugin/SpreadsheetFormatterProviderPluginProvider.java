@@ -135,6 +135,7 @@ final class SpreadsheetFormatterProviderPluginProvider implements SpreadsheetFor
         return PluginInfo.with(
             info.url(),
             PluginName.with(
+                SpreadsheetFormatterName.class.getSimpleName(),
                 info.name()
                     .value()
             )

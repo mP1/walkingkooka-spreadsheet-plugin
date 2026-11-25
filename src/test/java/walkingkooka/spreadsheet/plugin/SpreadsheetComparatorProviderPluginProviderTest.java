@@ -37,7 +37,7 @@ import walkingkooka.spreadsheet.compare.provider.SpreadsheetComparatorProvider;
 import walkingkooka.spreadsheet.compare.provider.SpreadsheetComparatorProviderTesting;
 import walkingkooka.spreadsheet.compare.provider.SpreadsheetComparatorProviders;
 import walkingkooka.spreadsheet.compare.provider.SpreadsheetComparatorSelector;
-import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
+import walkingkooka.spreadsheet.meta.HasSpreadsheetMetadataTesting;
 
 import java.util.List;
 
@@ -45,8 +45,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class SpreadsheetComparatorProviderPluginProviderTest implements PluginProviderTesting<SpreadsheetComparatorProviderPluginProvider>,
     SpreadsheetComparatorProviderTesting<SpreadsheetComparatorProviderPluginProvider>,
-    SpreadsheetMetadataTesting,
-    ToStringTesting<SpreadsheetComparatorProviderPluginProvider> {
+    HasSpreadsheetMetadataTesting,
+    ToStringTesting {
 
     private final static AbsoluteUrl SPREADSHEET_COMPARATOR_INFO_URL = Url.parseAbsolute("https://example.com/SpreadsheetComparatorInfo123");
     private final static String SPREADSHEET_COMPARATOR_INFO_NAME = "test-456";
@@ -153,7 +153,10 @@ public final class SpreadsheetComparatorProviderPluginProviderTest implements Pl
         this.pluginInfosAndCheck(
             PluginInfo.with(
                 SPREADSHEET_COMPARATOR_INFO_URL,
-                PluginName.with(SPREADSHEET_COMPARATOR_INFO_NAME)
+                PluginName.with(
+                    SpreadsheetComparatorName.class.getSimpleName(),
+                    SPREADSHEET_COMPARATOR_INFO_NAME
+                )
             )
         );
     }
