@@ -115,6 +115,7 @@ final class SpreadsheetComparatorProviderPluginProvider implements SpreadsheetCo
         return PluginInfo.with(
             info.url(),
             PluginName.with(
+                SpreadsheetComparatorName.class.getSimpleName(),
                 info.name()
                     .value()
             )
